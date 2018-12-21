@@ -7,10 +7,13 @@ interface BookSearchContract {
 
     interface View : BaseView {
 
+        fun initSearchButton()
+        fun showBookList()
+        fun showNotResult()
     }
 
     interface Presenter : BasePresenter<View> {
-
+        fun searchBookList(bookName : String)
     }
 
 }
