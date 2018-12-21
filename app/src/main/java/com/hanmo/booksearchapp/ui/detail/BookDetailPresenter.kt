@@ -22,7 +22,6 @@ class BookDetailPresenter @Inject constructor(private val bookDetailRepository: 
         bookDetailView?.showProgress()
 
         bookDetailView?.getBookId()?.let { bookId ->
-            Log.e("hanmoleeeee id   ", bookId)
             bookDetailRepository.getBookDetail(bookId)
                     .doOnError { bookDetailView?.hideProgress() }
                     .doOnSuccess { bookDetailView?.hideProgress() }
@@ -30,7 +29,6 @@ class BookDetailPresenter @Inject constructor(private val bookDetailRepository: 
                             { res ->
                                 if (res.isSuccessful) {
                                     res.body()?.let { bookDetail ->
-                                        Log.e("hanmoleeeee", bookDetail.toString())
                                         bookDetailView?.showBookDetail(bookDetail)
                                     }
                                 }
