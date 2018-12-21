@@ -1,11 +1,13 @@
 package com.hanmo.booksearchapp.ui
 
+import android.util.Log
 import com.hanmo.booksearchapp.di.annotation.ActivityScoped
+import com.hanmo.booksearchapp.repository.BookSearchRepository
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @ActivityScoped
-class BookSearchPresenter @Inject constructor() : BookSearchContract.Presenter {
+class BookSearchPresenter @Inject constructor(private val bookSearchRepository: BookSearchRepository) : BookSearchContract.Presenter {
 
     private var bookSearchView : BookSearchContract.View? = null
 
@@ -17,7 +19,15 @@ class BookSearchPresenter @Inject constructor() : BookSearchContract.Presenter {
     }
 
     override fun searchBookList(bookName: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bookSearchRepository.getBookList(bookName)
+                .doOnError { Log.e("hanmoleeee errr", it.toString()) }
+                .subscribe(
+                        {
+                            Log.e("hanmoleeee res", it.body()?.bookList.toString())
+                        },
+                        {}
+                ).apply { compositeDisposable.add(this) }
+
     }
 
     override fun dropView() {
