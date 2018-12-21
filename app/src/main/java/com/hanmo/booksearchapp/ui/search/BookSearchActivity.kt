@@ -3,6 +3,7 @@ package com.hanmo.booksearchapp.ui.search
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.KeyEvent
 import android.view.View
 import com.hanmo.booksearchapp.R
 import com.hanmo.booksearchapp.base.BaseActivity
@@ -15,6 +16,10 @@ import kotlinx.android.synthetic.main.activity_book_search.*
 import org.jetbrains.anko.toast
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+
+
 
 @ActivityScoped
 class BookSearchActivity : BaseActivity(), BookSearchContract.View {
@@ -61,12 +66,26 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
         searchButton.clicks()
                 .throttleFirst(300, TimeUnit.MILLISECONDS, mainThread())
                 .subscribe {
-                    val bookName = inputBookName.text.trim()
-                    if (bookName.isEmpty()) showError("검색어를 입력해주세요.")
-                    else presenter.loadBookList(bookName.toString(), 1)
+                    searchBook()
                 }
                 .apply { presenter.compositeDisposable.add(this) }
 
+    }
+
+    override fun initKeybord() {
+        inputBookName.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchBook()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+    }
+
+    private fun searchBook() {
+        val bookName = inputBookName.text.trim()
+        if (bookName.isEmpty()) showError("검색어를 입력해주세요.")
+        else presenter.loadBookList(bookName.toString(), 1)
     }
 
     override fun showBookList(bookList: MutableList<Book>) {

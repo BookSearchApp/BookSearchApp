@@ -14,8 +14,12 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
 
     override fun takeView(view: BookSearchContract.View) {
         bookSearchView = view
-        bookSearchView?.initSearchButton()
-        bookSearchView?.initBookList()
+
+        bookSearchView?.run {
+            initSearchButton()
+            initBookList()
+            initKeybord()
+        }
     }
 
     override fun loadBookList(bookName: String, page: Int) {

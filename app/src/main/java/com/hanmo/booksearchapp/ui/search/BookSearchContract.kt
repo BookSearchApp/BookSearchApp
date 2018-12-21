@@ -10,6 +10,7 @@ interface BookSearchContract {
 
         fun initSearchButton()
         fun initBookList()
+        fun initKeybord()
         fun showBookList(bookList: MutableList<Book>)
         fun updateBookList(bookList: MutableList<Book>)
         fun showNotResult()

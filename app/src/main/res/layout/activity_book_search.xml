@@ -25,6 +25,8 @@
             android:layout_toStartOf="@+id/searchButton"
             android:layout_toLeftOf="@+id/searchButton"
             android:background="@android:color/white"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:hint="@string/inputBookNameHint"
             android:textSize="12sp" />
 
