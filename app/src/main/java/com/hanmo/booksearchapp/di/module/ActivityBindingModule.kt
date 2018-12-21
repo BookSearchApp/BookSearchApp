@@ -12,4 +12,8 @@ abstract class ActivityBindingModule {
     @ContributesAndroidInjector(modules = [BookSearchModule::class])
     abstract fun bookSearchActivity() : BookSearchActivity
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [BookDetailModule::class])
+    abstract fun bookDetailActivity() : BookDetailActivity
+
 }
