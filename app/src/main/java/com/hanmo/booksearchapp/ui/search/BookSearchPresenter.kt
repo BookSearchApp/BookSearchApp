@@ -18,7 +18,7 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
         bookSearchView?.run {
             initSearchButton()
             initBookList()
-            initKeybord()
+            initKeyboard()
         }
     }
 

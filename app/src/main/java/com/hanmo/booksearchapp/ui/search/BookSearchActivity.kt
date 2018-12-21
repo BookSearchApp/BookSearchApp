@@ -72,7 +72,7 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
 
     }
 
-    override fun initKeybord() {
+    override fun initKeyboard() {
         inputBookName.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchBook()
