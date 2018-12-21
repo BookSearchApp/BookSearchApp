@@ -1,6 +1,10 @@
 package com.hanmo.booksearchapp.ui
 
-class BookSearchPresenter : BookSearchContract.Presenter {
+import com.hanmo.booksearchapp.di.annotation.ActivityScoped
+import javax.inject.Inject
+
+@ActivityScoped
+class BookSearchPresenter @Inject constructor() : BookSearchContract.Presenter {
 
     private var bookSearchView : BookSearchContract.View? = null
 
