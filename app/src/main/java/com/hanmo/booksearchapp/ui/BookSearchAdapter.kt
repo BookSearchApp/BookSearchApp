@@ -2,6 +2,7 @@ package com.hanmo.booksearchapp.ui
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.hanmo.booksearchapp.R
@@ -11,6 +12,16 @@ import kotlinx.android.synthetic.main.item_book.view.*
 class BookSearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var bookList : MutableList<Book> = mutableListOf()
+
+    private lateinit var itemClickListener : OnItemClickListener
+
+    fun setOnItemClickListener(itemClickListener : OnItemClickListener) {
+        this.itemClickListener = itemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(bookId: String?)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return BookListHolder(parent)
@@ -37,13 +48,21 @@ class BookSearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class BookListHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false)) {
+            LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false)) , View.OnClickListener{
+
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         fun onBind(book: Book) {
             itemView?.run {
                 Glide.with(context).load(book.bookImage).thumbnail(0.1f).into(bookImage)
                 bookNameText.text = book.title
             }
+        }
+
+        override fun onClick(v: View?) {
+            itemClickListener.onItemClick(bookList[adapterPosition].id)
         }
     }
 }

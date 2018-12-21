@@ -22,6 +22,12 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
 
     private val bookSearchAdapter : BookSearchAdapter by lazy { BookSearchAdapter() }
 
+    private val onItemClickListener = object : BookSearchAdapter.OnItemClickListener {
+        override fun onItemClick(bookId: String?) {
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_search)
@@ -36,6 +42,7 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
 
     override fun initBookList() {
         bookList?.run {
+            bookSearchAdapter.setOnItemClickListener(onItemClickListener)
             adapter = bookSearchAdapter
 
             val infiniteScrollListener = object : InfiniteScrollListener(layoutManager as LinearLayoutManager) {
