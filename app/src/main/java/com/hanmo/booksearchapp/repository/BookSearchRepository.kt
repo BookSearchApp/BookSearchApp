@@ -9,8 +9,8 @@ import retrofit2.Response
 
 class BookSearchRepository(private val bookSearchApi: BookSearchApi) {
 
-    fun getBookList(bookName : String) : Single<Response<BookList>> {
-        return bookSearchApi.getBookList(bookName)
+    fun getBookList(bookName : String, page : Int) : Single<Response<BookList>> {
+        return bookSearchApi.getBookList(bookName, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

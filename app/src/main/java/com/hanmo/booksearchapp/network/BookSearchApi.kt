@@ -8,6 +8,6 @@ import retrofit2.http.Path
 
 interface BookSearchApi {
 
-    @GET("search/{bookName}")
-    fun getBookList(@Path("bookName") bookName : String) : Single<Response<BookList>>
+    @GET("search/{bookName}/{page}")
+    fun getBookList(@Path("bookName") bookName : String, @Path("page") page : Int) : Single<Response<BookList>>
 }

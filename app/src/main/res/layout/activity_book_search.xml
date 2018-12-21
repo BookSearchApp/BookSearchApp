@@ -42,9 +42,8 @@
 
     </RelativeLayout>
 
-
-    <FrameLayout
-        android:id="@+id/bookListContainer"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/bookSearchRefresh"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +51,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchToolbar">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/bookList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
-    </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

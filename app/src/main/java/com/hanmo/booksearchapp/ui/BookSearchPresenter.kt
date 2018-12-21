@@ -16,16 +16,29 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
     override fun takeView(view: BookSearchContract.View) {
         bookSearchView = view
         bookSearchView?.initSearchButton()
+        bookSearchView?.initBookList()
     }
 
-    override fun searchBookList(bookName: String) {
-        bookSearchRepository.getBookList(bookName)
-                .doOnError { Log.e("hanmoleeee errr", it.toString()) }
+    override fun loadBookList(bookName: String, page: Int) {
+        bookSearchView?.showProgress()
+        bookSearchRepository.getBookList(bookName, page)
+                .doOnError { bookSearchView?.showError("Network Error") }
+                .doOnSuccess { bookSearchView?.hideProgress() }
                 .subscribe(
-                        {
-                            Log.e("hanmoleeee res", it.body()?.bookList.toString())
+                        { res ->
+                            if (res.isSuccessful) {
+                                res.body()?.bookList?.let { bookList ->
+                                    if (page == 1) {
+                                        bookSearchView?.showBookList(bookList)
+                                    } else {
+                                        bookSearchView?.updateBookList(bookList)
+                                    }
+                                } ?: kotlin.run {
+                                    bookSearchView?.showNotResult()
+                                }
+                            }
                         },
-                        {}
+                        { bookSearchView?.hideProgress() }
                 ).apply { compositeDisposable.add(this) }
 
     }
