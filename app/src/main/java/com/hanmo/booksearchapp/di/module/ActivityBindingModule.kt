@@ -1,7 +1,7 @@
 package com.hanmo.booksearchapp.di.module
 
 import com.hanmo.booksearchapp.di.annotation.ActivityScoped
-import com.hanmo.booksearchapp.ui.BookSearchActivity
+import com.hanmo.booksearchapp.ui.search.BookSearchActivity
 import com.hanmo.booksearchapp.ui.detail.BookDetailActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -1,9 +1,9 @@
 package com.hanmo.booksearchapp.di.module
 
 import com.hanmo.booksearchapp.di.annotation.ActivityScoped
-import com.hanmo.booksearchapp.ui.BookSearchApiModule
-import com.hanmo.booksearchapp.ui.BookSearchContract
-import com.hanmo.booksearchapp.ui.BookSearchPresenter
+import com.hanmo.booksearchapp.ui.search.BookSearchApiModule
+import com.hanmo.booksearchapp.ui.search.BookSearchContract
+import com.hanmo.booksearchapp.ui.search.BookSearchPresenter
 import dagger.Binds
 import dagger.Module
 

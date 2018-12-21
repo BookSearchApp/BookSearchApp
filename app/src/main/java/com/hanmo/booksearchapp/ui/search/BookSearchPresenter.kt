@@ -1,6 +1,5 @@
-package com.hanmo.booksearchapp.ui
+package com.hanmo.booksearchapp.ui.search
 
-import android.util.Log
 import com.hanmo.booksearchapp.di.annotation.ActivityScoped
 import com.hanmo.booksearchapp.repository.BookSearchRepository
 import io.reactivex.disposables.CompositeDisposable
@@ -28,10 +27,14 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
                         { res ->
                             if (res.isSuccessful) {
                                 res.body()?.bookList?.let { bookList ->
-                                    if (page == 1) {
-                                        bookSearchView?.showBookList(bookList)
+                                    if (!bookList.isEmpty()) {
+                                        if (page == 1) {
+                                            bookSearchView?.showBookList(bookList)
+                                        } else {
+                                            bookSearchView?.updateBookList(bookList)
+                                        }
                                     } else {
-                                        bookSearchView?.updateBookList(bookList)
+                                        bookSearchView?.showNotResult()
                                     }
                                 } ?: kotlin.run {
                                     bookSearchView?.showNotResult()

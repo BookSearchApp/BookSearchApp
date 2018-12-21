@@ -1,12 +1,14 @@
-package com.hanmo.booksearchapp.ui
+package com.hanmo.booksearchapp.ui.search
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.hanmo.booksearchapp.R
 import com.hanmo.booksearchapp.base.BaseActivity
 import com.hanmo.booksearchapp.di.annotation.ActivityScoped
 import com.hanmo.booksearchapp.model.Book
+import com.hanmo.booksearchapp.ui.detail.BookDetailActivity
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import kotlinx.android.synthetic.main.activity_book_search.*
@@ -24,7 +26,7 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
 
     private val onItemClickListener = object : BookSearchAdapter.OnItemClickListener {
         override fun onItemClick(bookId: String?) {
-
+            startDetailActivity(bookId)
         }
     }
 
@@ -68,6 +70,8 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
     }
 
     override fun showBookList(bookList: MutableList<Book>) {
+        bookSearchRefresh.visibility = View.VISIBLE
+        notResultText.visibility = View.GONE
         bookSearchAdapter.loadBookList(bookList)
     }
 
@@ -75,8 +79,15 @@ class BookSearchActivity : BaseActivity(), BookSearchContract.View {
         bookSearchAdapter.updateBookList(bookList)
     }
 
+    override fun startDetailActivity(bookId: String?) {
+        bookId?.let { id ->
+            startActivity(BookDetailActivity.newIntent(this, id))
+        }
+    }
+
     override fun showNotResult() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        bookSearchRefresh.visibility = View.GONE
+        notResultText.visibility = View.VISIBLE
     }
 
     override fun showProgress() {

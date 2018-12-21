@@ -1,4 +1,4 @@
-package com.hanmo.booksearchapp.ui
+package com.hanmo.booksearchapp.ui.search
 
 import com.hanmo.booksearchapp.base.BasePresenter
 import com.hanmo.booksearchapp.base.BaseView
@@ -15,6 +15,7 @@ interface BookSearchContract {
         fun showNotResult()
         fun showProgress()
         fun hideProgress()
+        fun startDetailActivity(bookId: String?)
     }
 
     interface Presenter : BasePresenter<View> {

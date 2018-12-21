@@ -1,4 +1,4 @@
-package com.hanmo.booksearchapp.ui
+package com.hanmo.booksearchapp.ui.search
 
 import com.hanmo.booksearchapp.network.BookSearchApi
 import com.hanmo.booksearchapp.repository.BookSearchRepository

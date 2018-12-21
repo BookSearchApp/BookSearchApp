@@ -3,4 +3,5 @@
     <string name="search">Search</string>
     <string name="inputBookNameHint">책 이름을 입력하세요</string>
     <string name="bookImageDescription">BookImage</string>
+    <string name="notResult">결과가 없습니다!</string>
 </resources>
