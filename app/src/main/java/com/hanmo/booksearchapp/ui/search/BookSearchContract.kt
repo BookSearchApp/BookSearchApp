@@ -14,8 +14,6 @@ interface BookSearchContract {
         fun showBookList(bookList: MutableList<Book>)
         fun updateBookList(bookList: MutableList<Book>)
         fun showNotResult()
-        fun showProgress()
-        fun hideProgress()
         fun startDetailActivity(bookId: String?)
     }
 

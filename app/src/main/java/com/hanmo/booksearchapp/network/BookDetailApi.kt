@@ -8,6 +8,6 @@ import retrofit2.http.Path
 
 interface BookDetailApi {
 
-    @GET("book/{bookId}")
+    @GET("books/{bookId}")
     fun getBookDetail(@Path("bookId") bookId : String) : Single<Response<BookDetail>>
 }

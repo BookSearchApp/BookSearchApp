@@ -25,7 +25,7 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
     override fun loadBookList(bookName: String, page: Int) {
         bookSearchView?.showProgress()
         bookSearchRepository.getBookList(bookName, page)
-                .doOnError { bookSearchView?.showError("Network Error") }
+                .doOnError { bookSearchView?.hideProgress() }
                 .doOnSuccess { bookSearchView?.hideProgress() }
                 .subscribe(
                         { res ->
@@ -45,7 +45,7 @@ class BookSearchPresenter @Inject constructor(private val bookSearchRepository: 
                                 }
                             }
                         },
-                        { bookSearchView?.hideProgress() }
+                        { bookSearchView?.showError("Network Error") }
                 ).apply { compositeDisposable.add(this) }
 
     }
